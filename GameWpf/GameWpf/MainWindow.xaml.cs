@@ -27,6 +27,7 @@ namespace GameWpf
             InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             this.PreviewKeyDown += new KeyEventHandler(HandleBar);
+            AnimateBall();
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -59,6 +60,19 @@ namespace GameWpf
                 }
             }
         }
+
+        public void AnimateBall()
+        {
+        
+            DoubleAnimation doubleAnimation = new DoubleAnimation();
+            doubleAnimation.To = 500;
+            doubleAnimation.From = 0;
+            doubleAnimation.Duration = TimeSpan.FromSeconds(5);
+
+            Ball.BeginAnimation(LeftProperty, doubleAnimation);
+        }
+
+
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
 

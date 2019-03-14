@@ -24,7 +24,7 @@ namespace GameWpf
         {
             InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
-          //  this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+            this.PreviewKeyDown += new KeyEventHandler(HandleBar);
 
 
         }
@@ -38,6 +38,20 @@ namespace GameWpf
                 {
                     Close();
                 }
+            }
+        }
+
+        public void HandleBar(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Left)
+            {
+                Console.WriteLine("sdasdasd");
+                Bar.Margin = new Thickness((Bar.Margin.Left - 10), 395, 0,0);
+            }
+            if (e.Key == Key.Right)
+            {
+                Console.WriteLine("right");
+                Bar.Margin = new Thickness((Bar.Margin.Left + 10), 395, 0, 0);
             }
         }
 

@@ -9,7 +9,7 @@
     <Grid>
         <Button Name="btnCancel" IsCancel="true" Click="BtnCancel_Click" Visibility="Hidden">Cancel</Button>
         <Rectangle Fill="Red" HorizontalAlignment="Left" Height="25" Margin="385,130,0,0" Stroke="Black" VerticalAlignment="Top" Width="25"/>
-        <Rectangle Fill="Black" HorizontalAlignment="Left" Height="25" Margin="225,385,0,0" Stroke="Black" VerticalAlignment="Top" Width="325"/>
+        <Rectangle Name="Bar" Fill="Black" HorizontalAlignment="Left" Height="25" Margin="225,395,0,0" Stroke="Black" VerticalAlignment="Top" Width="325"/>
         <Label Content="Score: 0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

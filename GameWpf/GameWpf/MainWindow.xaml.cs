@@ -24,6 +24,8 @@ namespace GameWpf
         {
             InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+          //  this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+
 
         }
 
@@ -37,7 +39,6 @@ namespace GameWpf
                     Close();
                 }
             }
-             
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

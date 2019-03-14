@@ -12,13 +12,13 @@
         <Rectangle Name="Bar" Fill="Black" HorizontalAlignment="Left" Height="25" Margin="225,395,0,0" Stroke="Black" VerticalAlignment="Top" Width="325"/>
         <Label Content="Score: 0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
 
-        <Rectangle Name="Rect1" Canvas.Left="380" Fill="Red" Stroke="Black" Width="25" Height="25" Canvas.Top="135">
+        <Rectangle Name="Ball" Canvas.Left="380" Fill="Red" Stroke="Black" Width="25" Height="25" Canvas.Top="135">
             <Rectangle.Triggers>
                 <EventTrigger RoutedEvent="Window.Loaded">
                     <BeginStoryboard>
                         <Storyboard>
                             <DoubleAnimation
-                                Storyboard.TargetName="Rect1"
+                                Storyboard.TargetName="Ball"
                                 Storyboard.TargetProperty="(Canvas.Left)"
                                 From="10" To="500"
                                 Duration="0:0:2"/>

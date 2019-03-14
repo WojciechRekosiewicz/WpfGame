@@ -46,12 +46,18 @@ namespace GameWpf
             if(e.Key == Key.Left)
             {
                 Console.WriteLine("sdasdasd");
-                Bar.Margin = new Thickness((Bar.Margin.Left - 10), 395, 0,0);
+                if (Bar.Margin.Left > 0)
+                {
+                    Bar.Margin = new Thickness((Bar.Margin.Left - 10), 395, 0, 0);
+                }
             }
             if (e.Key == Key.Right)
             {
                 Console.WriteLine("right");
-                Bar.Margin = new Thickness((Bar.Margin.Left + 10), 395, 0, 0);
+                if (Bar.Margin.Left < 459)
+                {
+                    Bar.Margin = new Thickness((Bar.Margin.Left + 10), 395, 0, 0);
+                }
             }
         }
 

@@ -10,7 +10,7 @@
         <Button Name="btnCancel" IsCancel="true" Click="BtnCancel_Click" Visibility="Hidden">Cancel</Button>
         <Rectangle Name="Bar" Fill="Black" HorizontalAlignment="Left" Height="25" Margin="225,395,0,0" Stroke="Black" VerticalAlignment="Top" Width="325"/>
         <Label Content="Score: 0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Rectangle Name="Ball" Canvas.Left="380" Fill="Red" Stroke="Black" Width="25" Height="25" Canvas.Top="135"/>
+        <Rectangle Name="Ball" Canvas.Left="370" Fill="Red" Stroke="Black" Width="25" Height="25" Canvas.Top="150"/>
     </Canvas>
 
 </Window>

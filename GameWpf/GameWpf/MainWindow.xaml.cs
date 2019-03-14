@@ -65,11 +65,22 @@ namespace GameWpf
         {
         
             DoubleAnimation doubleAnimation = new DoubleAnimation();
-            doubleAnimation.To = 500;
+            doubleAnimation.To = 760;
             doubleAnimation.From = 0;
-            doubleAnimation.Duration = TimeSpan.FromSeconds(5);
+            doubleAnimation.Duration = TimeSpan.FromSeconds(2);
 
             Ball.BeginAnimation(LeftProperty, doubleAnimation);
+
+            //doubleAnimation.Completed += (s, e) =>
+            //{
+            //    DoubleAnimation doubleAnimation1 = new DoubleAnimation();
+            //    doubleAnimation1.From = 760;
+            //    doubleAnimation1.To = 0;
+            //    doubleAnimation1.Duration = TimeSpan.FromSeconds(2);
+
+            //    Ball.BeginAnimation(LeftProperty, doubleAnimation);
+
+            //};
         }
 
 

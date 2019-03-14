@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace GameWpf
 {
@@ -25,15 +27,14 @@ namespace GameWpf
             InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             this.PreviewKeyDown += new KeyEventHandler(HandleBar);
-
-
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
             {
-                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Delete Confirmation", System.Windows.MessageBoxButton.YesNo);
+                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("Are you sure?", "Delete Confirmation",
+                    System.Windows.MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     Close();
@@ -45,7 +46,6 @@ namespace GameWpf
         {
             if(e.Key == Key.Left)
             {
-                Console.WriteLine("sdasdasd");
                 if (Bar.Margin.Left > 0)
                 {
                     Bar.Margin = new Thickness((Bar.Margin.Left - 10), 395, 0, 0);
@@ -53,14 +53,12 @@ namespace GameWpf
             }
             if (e.Key == Key.Right)
             {
-                Console.WriteLine("right");
                 if (Bar.Margin.Left < 459)
                 {
                     Bar.Margin = new Thickness((Bar.Margin.Left + 10), 395, 0, 0);
                 }
             }
         }
-
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
 

@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:GameWpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" Background="Gray" Icon="./Resources/dice.png" ResizeMode="NoResize">
-    <Canvas Name="Can1">
+    <Canvas Name="canvas">
         <Button Name="btnCancel" IsCancel="true" Click="BtnCancel_Click" Visibility="Hidden">Cancel</Button>
-        <Rectangle Name="Bar" Fill="Black" HorizontalAlignment="Left" Height="25" Margin="225,395,0,0" Stroke="Black" VerticalAlignment="Top" Width="325"/>
-        <Label Name="Score" Content="Score: 0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Rectangle x:Name="Bar" Fill="Black" HorizontalAlignment="Left" Height="25" Margin="225,395,0,0" Stroke="Black" VerticalAlignment="Top" Width="325"/>
         <Rectangle Name="Ball" Canvas.Left="370" Fill="Red" Stroke="Black" Width="25" Height="25" Canvas.Top="150"/>
+        <Rectangle x:Name="Ball1" Canvas.Left="370" Fill="Red" Stroke="Black" Width="25" Height="25" Canvas.Top="150"/>
+        <TextBlock Name="PlayerScore"  TextWrapping="Wrap" Text="Score: 0" Canvas.Left="10" Canvas.Top="10" RenderTransformOrigin="0.479,-1.003"/>
     </Canvas>
 
 </Window>

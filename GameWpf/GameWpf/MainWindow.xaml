@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="Gray" Icon="./Resources/dice.png" ResizeMode="NoResize">
     <Canvas Name="Can1">
         <Button Name="btnCancel" IsCancel="true" Click="BtnCancel_Click" Visibility="Hidden">Cancel</Button>
         <Rectangle Name="Bar" Fill="Black" HorizontalAlignment="Left" Height="25" Margin="225,395,0,0" Stroke="Black" VerticalAlignment="Top" Width="325"/>
-        <Label Content="Score: 0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Name="Score" Content="Score: 0" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Rectangle Name="Ball" Canvas.Left="370" Fill="Red" Stroke="Black" Width="25" Height="25" Canvas.Top="150"/>
     </Canvas>
 

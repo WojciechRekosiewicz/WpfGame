@@ -31,7 +31,7 @@ namespace GameWpf
         int score = 0;
        
 
-        DoubleAnimation doubleAnimation = new DoubleAnimation();
+      DoubleAnimation doubleAnimation = new DoubleAnimation();
 
         private void GoodTimer()
         {
@@ -48,7 +48,7 @@ namespace GameWpf
             PlayerScore.Text = String.Format("{0} :X  {1} :Y ::: {2} : Height {3} : Width", Canvas.GetLeft(Ball1), Canvas.GetTop(Ball1), canvas.ActualWidth, canvas.ActualHeight) ;
             Canvas.SetTop(Ball1, Canvas.GetTop(Ball1) - ballY);
             Canvas.SetLeft(Ball1, Canvas.GetLeft(Ball1) - ballX);
-            Pos.Text = String.Format("BallX : {0} BallY: {1} ", ballX, ballY);
+            Pos.Text = String.Format("BallX : {0} BallY: {1} ///// Bar X :{2} Bar  Y: {3}", ballX, ballY, Canvas.GetLeft(Bar), Canvas.GetTop(Bar));
 
 
 
@@ -72,38 +72,31 @@ namespace GameWpf
                 ballY = -ballY;
             }
 
-            //if (Canvas.GetLeft(Ball1) == 800)
-            //{
+            Rect rect1 = new Rect(Canvas.GetLeft(Ball1), Canvas.GetTop(Ball1), Ball1.Width, Ball1.Height);
+            Rect rect2 = new Rect(Canvas.GetLeft(Bar), Canvas.GetTop(Bar), Bar.Width, Bar.Height);
+            if (rect1.IntersectsWith(rect2))
+            {
+                ballY = -ballY;
+                ballY += 100;
+            }
 
-            //    ballX = -ballX;
-            //    ballX += 2;
-            //}
+            if(Canvas.GetTop(Ball1) == Canvas.GetTop(Bar) && Canvas.GetLeft(Ball1) == Canvas.GetLeft(Bar))
+            {
+                ballY = -ballY;
+                ballY += 10;
+            }
 
-            //if (Ball1.RenderedGeometry.Bounds.IntersectsWith(Bar))
-            //{
-            // ballx = -ballx;
-            //}
-
-
-            //if (Canvas.GetTop(Ball1) + Ball1.Width > 400)
+            //if (rect1.Bounds.IntersectsWith(rect2.Bounds))
             //{
             //    ballY = -ballY;
             //}
 
-            //if (Canvas.GetTop(Ball1) < 0 || Canvas.GetTop(Ball1) + Ball1.Width < 80)
+            //if (rect1.renderedgeometry.bounds.intersectswith(rect2))
             //{
-            //    Canvas.SetLeft(Ball1, 434);
-            //    ballX = -ballX;
-            //    ballX -= 2;
+            //    ballY = -ballY;
+            //    ballY += 100;
             //}
 
-
-            //if (Canvas.GetLeft(Ball1) + Ball1.Width < 50)
-            //{
-            //    Canvas.SetLeft(Ball1, 434);
-            //    ballX = -ballX;
-            //    ballX -= 2;
-            //}
         }
 
         private void MenageAnimations()
@@ -126,7 +119,6 @@ namespace GameWpf
 
         }
 
-   
 
         public MainWindow()
         {

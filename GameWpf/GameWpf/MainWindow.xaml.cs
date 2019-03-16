@@ -34,7 +34,7 @@ namespace GameWpf
             InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             this.PreviewKeyDown += new KeyEventHandler(BarMovment);
-            this.PreviewKeyDown += new KeyEventHandler(Pause);
+            this.PreviewKeyDown += new KeyEventHandler(PauseKey);
 
             BallAnimation();
             Timer();
@@ -44,7 +44,7 @@ namespace GameWpf
         private void Timer()
         {
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += DispatcherTimer_Tick;
+            dispatcherTimer.Tick += BallLogic;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             dispatcherTimer.Start();
         }
@@ -64,13 +64,18 @@ namespace GameWpf
             }
         }
 
-        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        private void Score()
+        {
+            PlayerScore.Text = String.Format("{0} :X  {1} :Y ::: {2} : Height {3} : Width, SCORE: {4}", Canvas.GetLeft(Ball), Canvas.GetTop(Ball), canvas.ActualWidth, canvas.ActualHeight, score);
+            Pos.Text = String.Format("Bar X :{0} Bar  Y: {1} {2}", Canvas.GetLeft(Bar), Canvas.GetTop(Bar), pause);
+        }
+
+        private void BallLogic(object sender, EventArgs e)
         {
             Canvas.SetTop(Ball, Canvas.GetTop(Ball) - ballY);
             Canvas.SetLeft(Ball, Canvas.GetLeft(Ball) - ballX);
-            PlayerScore.Text = String.Format("{0} :X  {1} :Y ::: {2} : Height {3} : Width, SCORE: {4}", Canvas.GetLeft(Ball), Canvas.GetTop(Ball), canvas.ActualWidth, canvas.ActualHeight, score);
-            Pos.Text = String.Format("Bar X :{0} Bar  Y: {1} {2}", Canvas.GetLeft(Bar), Canvas.GetTop(Bar), pause);
 
+            Score();
             PauseHandler();
 
             if (CheckCollisionBallWithBar(Ball, Bar))
@@ -116,7 +121,7 @@ namespace GameWpf
             }
         }
 
-        private void Pause(object sender, KeyEventArgs e)
+        private void PauseKey(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
             {
@@ -170,7 +175,7 @@ namespace GameWpf
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e) { }
 
-        //To DELETE
+        //TO DELETE
         private void BallAnimation()
         {
             DoubleAnimation doubleAnimation = new DoubleAnimation();

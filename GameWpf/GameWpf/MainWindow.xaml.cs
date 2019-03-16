@@ -53,18 +53,18 @@ namespace GameWpf
 
 
 
-            if (Canvas.GetLeft(Ball1) <= 0)
+            if (Canvas.GetLeft(Ball1) <= 1)
             {
                
                 ballX = -ballX;
-                ballX -= 2;
+               // ballX -= 2;
             }
 
-            if (Canvas.GetLeft(Ball1) > 800)
+            if (Canvas.GetLeft(Ball1) >= 770)
             {
            
                 ballX = -ballX;
-                ballX += 2;
+              //  ballX += 2;
             }
 
             if (Canvas.GetTop(Ball1) < 0 || Canvas.GetTop(Ball1) + Ball1.Height > 400)
@@ -72,12 +72,12 @@ namespace GameWpf
                 ballY = -ballY;
             }
 
-            if (Canvas.GetLeft(Ball1) == 800)
-            {
+            //if (Canvas.GetLeft(Ball1) == 800)
+            //{
 
-                ballX = -ballX;
-                ballX += 2;
-            }
+            //    ballX = -ballX;
+            //    ballX += 2;
+            //}
 
             //if (Ball1.RenderedGeometry.Bounds.IntersectsWith(Bar))
             //{

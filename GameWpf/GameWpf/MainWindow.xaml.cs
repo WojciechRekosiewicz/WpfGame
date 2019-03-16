@@ -39,7 +39,7 @@ namespace GameWpf
 
         private void Timer()
         {
-            System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += GameLogic;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             dispatcherTimer.Start();
@@ -105,10 +105,8 @@ namespace GameWpf
 
         public void GameOver()
         {
-            MessageBoxResult result = MessageBox.Show($"SCORE : {score}",
-                                          "Game Over!",
-                                          MessageBoxButton.YesNo,
-                                          MessageBoxImage.Question);
+            MessageBoxResult result = MessageBox.Show($"SCORE : {score}", "Game Over!",
+                                          MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
             {
                 Application.Current.Shutdown();
@@ -120,7 +118,7 @@ namespace GameWpf
             if (pause)
             {
                 MessageBoxResult messageBoxResult = MessageBox.Show("You want to continue?", "Game Paused",
-                    System.Windows.MessageBoxButton.YesNo);
+                    MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.No)
                 {
                     Close();
@@ -197,12 +195,3 @@ namespace GameWpf
         }
     }
 }
-
-
-
-
-
-
-
-
-

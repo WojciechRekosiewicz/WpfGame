@@ -45,20 +45,22 @@ namespace GameWpf
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            PlayerScore.Text = String.Format("{0} :X  {1} :Y", Canvas.GetLeft(Ball1), Canvas.GetTop(Ball1)) ;
+            PlayerScore.Text = String.Format("{0} :X  {1} :Y ::: {2} : Height {3} : Width", Canvas.GetLeft(Ball1), Canvas.GetTop(Ball1), canvas.ActualWidth, canvas.ActualHeight) ;
             Canvas.SetTop(Ball1, Canvas.GetTop(Ball1) - ballY);
             Canvas.SetLeft(Ball1, Canvas.GetLeft(Ball1) - ballX);
+            Pos.Text = String.Format("BallX : {0} BallY: {1} ", ballX, ballY);
 
-           
 
-            if (Canvas.GetLeft(Ball1) < 0)
+
+
+            if (Canvas.GetLeft(Ball1) <= 0)
             {
                
                 ballX = -ballX;
                 ballX -= 2;
             }
 
-            if (Canvas.GetLeft(Ball1) + Width > 800)
+            if (Canvas.GetLeft(Ball1) > 800)
             {
            
                 ballX = -ballX;

@@ -29,6 +29,7 @@ namespace GameWpf
         int ballX = 5;
         int ballY = 5;
         int score = 0;
+        bool pause = false;
        
 
      
@@ -37,8 +38,15 @@ namespace GameWpf
         {
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += DispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             dispatcherTimer.Start();
+
+            if (pause)
+            {
+                MessageBox.Show("Stop");
+                dispatcherTimer.Stop();
+            }
+
         
            
         }
@@ -64,36 +72,54 @@ namespace GameWpf
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
-            PlayerScore.Text = String.Format("{0} :X  {1} :Y ::: {2} : Height {3} : Width", Canvas.GetLeft(Ball1), Canvas.GetTop(Ball1), canvas.ActualWidth, canvas.ActualHeight) ;
+            PlayerScore.Text = String.Format("{0} :X  {1} :Y ::: {2} : Height {3} : Width, SCORE: {4}", Canvas.GetLeft(Ball1), Canvas.GetTop(Ball1), canvas.ActualWidth, canvas.ActualHeight, score) ;
             Canvas.SetTop(Ball1, Canvas.GetTop(Ball1) - ballY);
             Canvas.SetLeft(Ball1, Canvas.GetLeft(Ball1) - ballX);
-            Pos.Text = String.Format("BallX : {0} BallY: {1} ///// Bar X :{2} Bar  Y: {3}", ballX, ballY, Canvas.GetLeft(Bar), Canvas.GetTop(Bar));
+            Pos.Text = String.Format("Bar X :{0} Bar  Y: {1} {2}", Canvas.GetLeft(Bar), Canvas.GetTop(Bar), pause);
 
+            PauseHandler();
 
-            
-                if (CheckCollision(Ball1, Bar))
+            if (CheckCollision(Ball1, Bar))
                 {
                     ballY = -ballY;
-                  //  ballY += 5;
+                    score += 1;
                 }
                 if (Canvas.GetLeft(Ball1) <= 1)
                 {
-
                     ballX = -ballX;
-                    // ballX -= 2;
                 }
 
                 if (Canvas.GetLeft(Ball1) >= 770)
                 {
-
                     ballX = -ballX;
-                    //  ballX += 2;
                 }
 
                 if (Canvas.GetTop(Ball1) < 0 || Canvas.GetTop(Ball1) + Ball1.Height > 400)
                 {
                     ballY = -ballY;
                 }
+
+                if (Canvas.GetTop(Ball1) >= 380)
+                {
+                    score -= 1;
+                }
+        }
+
+        public void PauseHandler()
+        {
+            if (pause)
+            {
+                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("You want to continue?", "Game Paused",
+                    System.Windows.MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.No)
+                {
+                    Close();
+                }
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    pause = false;
+                }
+            }
         }
 
         private void MoveRight()
@@ -116,9 +142,26 @@ namespace GameWpf
             InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             this.PreviewKeyDown += new KeyEventHandler(HandleBar);
+            this.PreviewKeyDown += new KeyEventHandler(Pause);
+
             MoveRight();
             GoodTimer();
             
+        }
+
+        private void Pause(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                if (!pause)
+                {
+                    pause = true;
+                }
+                else
+                {
+                    pause = false;
+                }
+            }
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)

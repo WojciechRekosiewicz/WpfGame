@@ -31,19 +31,38 @@ namespace GameWpf
         int score = 0;
        
 
-      DoubleAnimation doubleAnimation = new DoubleAnimation();
+     
 
         private void GoodTimer()
         {
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += dispatcherTimer_Tick;
+            dispatcherTimer.Tick += DispatcherTimer_Tick;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             dispatcherTimer.Start();
         
            
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        public static bool CheckCollision(FrameworkElement a, FrameworkElement b)
+        {
+            Rect rect1 = new Rect((double)a.GetValue(Canvas.LeftProperty), (double)a.GetValue(Canvas.TopProperty), a.Width, a.Height);
+            Rect rect2 = new Rect((double)b.GetValue(Canvas.LeftProperty), (double)b.GetValue(Canvas.TopProperty), b.Width, b.Height);
+
+            if (rect1.IntersectsWith(rect2))
+            {
+                Console.WriteLine("true");
+                return true;
+
+            }
+
+            else
+            {
+                Console.WriteLine("false");
+                return false;
+            }
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             PlayerScore.Text = String.Format("{0} :X  {1} :Y ::: {2} : Height {3} : Width", Canvas.GetLeft(Ball1), Canvas.GetTop(Ball1), canvas.ActualWidth, canvas.ActualHeight) ;
             Canvas.SetTop(Ball1, Canvas.GetTop(Ball1) - ballY);
@@ -51,40 +70,46 @@ namespace GameWpf
             Pos.Text = String.Format("BallX : {0} BallY: {1} ///// Bar X :{2} Bar  Y: {3}", ballX, ballY, Canvas.GetLeft(Bar), Canvas.GetTop(Bar));
 
 
-
-
-            if (Canvas.GetLeft(Ball1) <= 1)
-            {
-               
-                ballX = -ballX;
-               // ballX -= 2;
-            }
-
-            if (Canvas.GetLeft(Ball1) >= 770)
-            {
-           
-                ballX = -ballX;
-              //  ballX += 2;
-            }
-
-            if (Canvas.GetTop(Ball1) < 0 || Canvas.GetTop(Ball1) + Ball1.Height > 400)
-            {
-                ballY = -ballY;
-            }
-
-            Rect rect1 = new Rect(Canvas.GetLeft(Ball1), Canvas.GetTop(Ball1), Ball1.Width, Ball1.Height);
-            Rect rect2 = new Rect(Canvas.GetLeft(Bar), Canvas.GetTop(Bar), Bar.Width, Bar.Height);
-            if (rect1.IntersectsWith(rect2))
+            if (CheckCollision(Ball1, Bar))
             {
                 ballY = -ballY;
                 ballY += 100;
             }
+            if (Canvas.GetLeft(Ball1) <= 1)
+                {
 
-            if(Canvas.GetTop(Ball1) == Canvas.GetTop(Bar) && Canvas.GetLeft(Ball1) == Canvas.GetLeft(Bar))
-            {
-                ballY = -ballY;
-                ballY += 10;
-            }
+                    ballX = -ballX;
+                    // ballX -= 2;
+                }
+
+                if (Canvas.GetLeft(Ball1) >= 770)
+                {
+
+                    ballX = -ballX;
+                    //  ballX += 2;
+                }
+
+                if (Canvas.GetTop(Ball1) < 0 || Canvas.GetTop(Ball1) + Ball1.Height > 400)
+                {
+                    ballY = -ballY;
+                }
+            
+
+            //Rect rect1 = new Rect(Canvas.GetLeft(Ball1), Canvas.GetTop(Ball1), Ball1.Width, Ball1.Height);
+            //Rect rect2 = new Rect(Canvas.GetLeft(Bar), Canvas.GetTop(Bar), Bar.Width, Bar.Height);
+            //if (rect1.IntersectsWith(rect2))
+            //{
+            //    ballY = -ballY;
+            //    ballY += 100;
+            //}
+
+         
+
+            //if (Canvas.GetTop(Ball1) == Canvas.GetTop(Bar) && Canvas.GetLeft(Ball1) == Canvas.GetLeft(Bar))
+            //{
+            //    ballY = -ballY;
+            //    ballY += 10;
+            //}
 
             //if (rect1.Bounds.IntersectsWith(rect2.Bounds))
             //{
@@ -99,16 +124,12 @@ namespace GameWpf
 
         }
 
-        private void MenageAnimations()
-        {
-          
-                MoveRight();
-        }
+      
 
         private void MoveRight()
         {
 
-            //DoubleAnimation doubleAnimation = new DoubleAnimation();
+            DoubleAnimation doubleAnimation = new DoubleAnimation();
             doubleAnimation.To = 760;
             doubleAnimation.From = 0;
             doubleAnimation.AutoReverse = true;
@@ -125,7 +146,7 @@ namespace GameWpf
             InitializeComponent();
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
             this.PreviewKeyDown += new KeyEventHandler(HandleBar);
-            MenageAnimations();
+            MoveRight();
             GoodTimer();
             
         }

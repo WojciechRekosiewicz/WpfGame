@@ -70,12 +70,13 @@ namespace GameWpf
             Pos.Text = String.Format("BallX : {0} BallY: {1} ///// Bar X :{2} Bar  Y: {3}", ballX, ballY, Canvas.GetLeft(Bar), Canvas.GetTop(Bar));
 
 
-            if (CheckCollision(Ball1, Bar))
-            {
-                ballY = -ballY;
-                ballY += 100;
-            }
-            if (Canvas.GetLeft(Ball1) <= 1)
+            
+                if (CheckCollision(Ball1, Bar))
+                {
+                    ballY = -ballY;
+                  //  ballY += 5;
+                }
+                if (Canvas.GetLeft(Ball1) <= 1)
                 {
 
                     ballX = -ballX;
@@ -93,38 +94,7 @@ namespace GameWpf
                 {
                     ballY = -ballY;
                 }
-            
-
-            //Rect rect1 = new Rect(Canvas.GetLeft(Ball1), Canvas.GetTop(Ball1), Ball1.Width, Ball1.Height);
-            //Rect rect2 = new Rect(Canvas.GetLeft(Bar), Canvas.GetTop(Bar), Bar.Width, Bar.Height);
-            //if (rect1.IntersectsWith(rect2))
-            //{
-            //    ballY = -ballY;
-            //    ballY += 100;
-            //}
-
-         
-
-            //if (Canvas.GetTop(Ball1) == Canvas.GetTop(Bar) && Canvas.GetLeft(Ball1) == Canvas.GetLeft(Bar))
-            //{
-            //    ballY = -ballY;
-            //    ballY += 10;
-            //}
-
-            //if (rect1.Bounds.IntersectsWith(rect2.Bounds))
-            //{
-            //    ballY = -ballY;
-            //}
-
-            //if (rect1.renderedgeometry.bounds.intersectswith(rect2))
-            //{
-            //    ballY = -ballY;
-            //    ballY += 100;
-            //}
-
         }
-
-      
 
         private void MoveRight()
         {
@@ -168,27 +138,21 @@ namespace GameWpf
         {
             if(e.Key == Key.Left)
             {
-                if (Bar.Margin.Left > 0)
+                if(Canvas.GetLeft(Bar) > 0)
                 {
-                    
-                    Bar.Margin = new Thickness((Bar.Margin.Left - 10), 395, 0, 0);
+                    Canvas.SetLeft(Bar, Canvas.GetLeft(Bar) - 10);
                 }
             }
             if (e.Key == Key.Right)
             {
-                if (Bar.Margin.Left < 459)
+                if (Canvas.GetLeft(Bar) < 459)
                 {
-                   
-                    Bar.Margin = new Thickness((Bar.Margin.Left + 10), 395, 0, 0);
+                    Canvas.SetLeft(Bar, Canvas.GetLeft(Bar) + 10);
                 }
             }
         }
 
-        private void BtnCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        private void BtnCancel_Click(object sender, RoutedEventArgs e) { }
     }
 }
 

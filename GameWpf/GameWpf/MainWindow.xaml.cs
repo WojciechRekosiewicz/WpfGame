@@ -24,22 +24,20 @@ namespace GameWpf
 
     public partial class MainWindow : Window
     {
-        bool goRight;
-        bool goLeft;
+        
         int speed = 5;
         int ballX = 5;
         int ballY = 5;
         int score = 0;
-        int cpuPoint = 0;
+       
 
         DoubleAnimation doubleAnimation = new DoubleAnimation();
-        DispatcherTimer dTimer;
 
         private void GoodTimer()
         {
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Tick += dispatcherTimer_Tick;
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 20);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 10);
             dispatcherTimer.Start();
         
            
@@ -47,88 +45,71 @@ namespace GameWpf
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            PlayerScore.Text = "" + score;
+            PlayerScore.Text = String.Format("{0} :X  {1} :Y", Canvas.GetLeft(Ball1), Canvas.GetTop(Ball1)) ;
             Canvas.SetTop(Ball1, Canvas.GetTop(Ball1) - ballY);
             Canvas.SetLeft(Ball1, Canvas.GetLeft(Ball1) - ballX);
+
            
+
             if (Canvas.GetLeft(Ball1) < 0)
             {
-                Canvas.SetLeft(Ball1, 370);
+               
                 ballX = -ballX;
                 ballX -= 2;
-
             }
 
-            if (Canvas.GetTop(Ball1) + Ball1.Width > 800)
+            if (Canvas.GetLeft(Ball1) + Width > 800)
+            {
+           
+                ballX = -ballX;
+                ballX += 2;
+            }
+
+            if (Canvas.GetTop(Ball1) < 0 || Canvas.GetTop(Ball1) + Ball1.Height > 400)
             {
                 ballY = -ballY;
             }
 
-            if (Canvas.GetLeft(Ball1) < 0)
+            if (Canvas.GetLeft(Ball1) == 800)
             {
-                Canvas.SetLeft(Ball1, 434);
+
                 ballX = -ballX;
-                ballX -= 2;
+                ballX += 2;
             }
 
-            if (Canvas.GetTop(Ball1) < 0 || Canvas.GetTop(Ball1) + Ball1.Width < 80)
-            {
-                Canvas.SetLeft(Ball1, 434);
-                ballX = -ballX;
-                ballX -= 2;
-            }
-
-
-            if (Canvas.GetLeft(Ball1) + Ball1.Width < 50)
-            {
-                Canvas.SetLeft(Ball1, 434);
-                ballX = -ballX;
-                ballX -= 2;
-            }
             //if (Ball1.RenderedGeometry.Bounds.IntersectsWith(Bar))
             //{
             // ballx = -ballx;
             //}
 
 
+            //if (Canvas.GetTop(Ball1) + Ball1.Width > 400)
+            //{
+            //    ballY = -ballY;
+            //}
 
+            //if (Canvas.GetTop(Ball1) < 0 || Canvas.GetTop(Ball1) + Ball1.Width < 80)
+            //{
+            //    Canvas.SetLeft(Ball1, 434);
+            //    ballX = -ballX;
+            //    ballX -= 2;
+            //}
+
+
+            //if (Canvas.GetLeft(Ball1) + Ball1.Width < 50)
+            //{
+            //    Canvas.SetLeft(Ball1, 434);
+            //    ballX = -ballX;
+            //    ballX -= 2;
+            //}
         }
 
-
-        private void InitTimer()
-        {
-            dTimer = new DispatcherTimer();
-            //dTimer.Tick += new EventHandler(TickdTimer);
-            dTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
-            dTimer.Start();
-        }
-
-    
         private void MenageAnimations()
         {
           
                 MoveRight();
-        
         }
 
-        private void MoveUp()
-        {
-
-        }
-        private void MoveDown()
-        {
-
-        }
-        private void MoveLeft()
-        {
-            //DoubleAnimation doubleAnimation = new DoubleAnimation();
-            doubleAnimation.To = 0;
-            doubleAnimation.From = 750;
-            doubleAnimation.Duration = TimeSpan.FromSeconds(20);
-
-            Ball.BeginAnimation(LeftProperty, doubleAnimation);
-            
-        }
         private void MoveRight()
         {
 
@@ -152,7 +133,7 @@ namespace GameWpf
             this.PreviewKeyDown += new KeyEventHandler(HandleBar);
             MenageAnimations();
             GoodTimer();
-            //RectAnimationExample();
+            
         }
 
         private void HandleEsc(object sender, KeyEventArgs e)
@@ -204,59 +185,3 @@ namespace GameWpf
 
 
 
-
-
-
-//public void RectAnimationExample()
-//{
-
-//     Create a NameScope for this page so that
-//     Storyboards can be used.
-//    NameScope.SetNameScope(this, new NameScope());
-
-//    RectangleGeometry myRectangleGeometry = new RectangleGeometry();
-//    myRectangleGeometry.Rect = new Rect(0, 200, 100, 100);
-
-//     Assign the geometry a name so that
-//     it can be targeted by a Storyboard.
-//    this.RegisterName(
-//        "MyAnimatedRectangleGeometry", myRectangleGeometry);
-
-//    Path myPath = new Path();
-//    myPath.Fill = Brushes.LemonChiffon;
-//    myPath.StrokeThickness = 1;
-//    myPath.Stroke = Brushes.Black;
-//    myPath.Data = myRectangleGeometry;
-
-//    RectAnimation myRectAnimation = new RectAnimation();
-//    myRectAnimation.Duration = TimeSpan.FromSeconds(2);
-//    myRectAnimation.FillBehavior = FillBehavior.HoldEnd;
-
-//     Set the animation to repeat forever. 
-//    myRectAnimation.RepeatBehavior = RepeatBehavior.Forever;
-
-//     Set the From and To properties of the animation.
-//    myRectAnimation.From = new Rect(0, 200, 100, 100);
-//    myRectAnimation.To = new Rect(0, 50, 200, 50);
-
-//     Set the animation to target the Rect property
-//     of the object named "MyAnimatedRectangleGeometry."
-//    Storyboard.SetTargetName(myRectAnimation, "MyAnimatedRectangleGeometry");
-//    Storyboard.SetTargetProperty(
-//        myRectAnimation, new PropertyPath(RectangleGeometry.RectProperty));
-
-//     Create a storyboard to apply the animation.
-//    Storyboard ellipseStoryboard = new Storyboard();
-//    ellipseStoryboard.Children.Add(myRectAnimation);
-
-//     Start the storyboard when the Path loads.
-//    myPath.Loaded += delegate (object sender, RoutedEventArgs e)
-//    {
-//        ellipseStoryboard.Begin(this);
-//    };
-
-
-//    Can1.Children.Add(myPath);
-
-//    Content = Can1;
-//}

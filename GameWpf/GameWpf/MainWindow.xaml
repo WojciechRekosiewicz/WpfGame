@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GameWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="Gray" Icon="./Resources/dice.png" ResizeMode="NoResize">
+        Title="MainWindow" Height="450" Width="800" Background="Gray" Icon="./Resources/dice.png" ResizeMode="CanResize">
     <Canvas Name="canvas">
         <Button Name="btnCancel" IsCancel="true" Click="BtnCancel_Click" Visibility="Hidden">Cancel</Button>
         <Rectangle x:Name="Bar" Fill="Black" HorizontalAlignment="Left" Height="25" Margin="225,395,0,0" Stroke="Black" VerticalAlignment="Top" Width="325"/>

@@ -32,13 +32,9 @@ namespace GameWpf
         public MainWindow()
         {
             InitializeComponent();
-            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
-            this.PreviewKeyDown += new KeyEventHandler(BarMovment);
-            this.PreviewKeyDown += new KeyEventHandler(PauseKey);
-
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc) + new KeyEventHandler(BarMovment) + new KeyEventHandler(PauseKey);
             BallAnimation();
             Timer();
-
         }
 
         private void Timer()
@@ -88,7 +84,7 @@ namespace GameWpf
 
             if (Canvas.GetTop(Ball) >= 380)
             {
-                score -= 1;
+                GameOver();
             }
         }
 
@@ -107,11 +103,23 @@ namespace GameWpf
             }
         }
 
+        public void GameOver()
+        {
+            MessageBoxResult result = MessageBox.Show($"SCORE : {score}",
+                                          "Game Over!",
+                                          MessageBoxButton.YesNo,
+                                          MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
         public void PauseHandler()
         {
             if (pause)
             {
-                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("You want to continue?", "Game Paused",
+                MessageBoxResult messageBoxResult = MessageBox.Show("You want to continue?", "Game Paused",
                     System.Windows.MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.No)
                 {
@@ -143,7 +151,7 @@ namespace GameWpf
         {
             if (e.Key == Key.Escape)
             {
-                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show("You want to quit the game?", "Quit",
+                MessageBoxResult messageBoxResult = MessageBox.Show("You want to quit the game?", "Quit",
                     System.Windows.MessageBoxButton.YesNo);
 
                 if (messageBoxResult == MessageBoxResult.Yes)

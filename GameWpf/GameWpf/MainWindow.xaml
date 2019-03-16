@@ -9,8 +9,8 @@
     <Canvas Name="canvas">
         <Button Name="btnCancel" IsCancel="true" Click="BtnCancel_Click" Visibility="Hidden">Cancel</Button>
         <Rectangle x:Name="Bar" Fill="Black" HorizontalAlignment="Left" Height="25" Stroke="Black" VerticalAlignment="Top" Width="250" Canvas.Left="225" Canvas.Top="384"/>
-        <Rectangle Name="Ball" Canvas.Left="370" Fill="Gray" Stroke="Gray" Width="25" Height="25" Canvas.Top="150"/>
-        <Rectangle x:Name="Ball1" Canvas.Left="370" Fill="Red" Stroke="Black" Width="25" Height="25" Canvas.Top="150"/>
+        <Rectangle Name="Ball2" Canvas.Left="370" Fill="Gray" Stroke="Gray" Width="25" Height="25" Canvas.Top="150"/>
+        <Rectangle x:Name="Ball" Canvas.Left="370" Fill="Red" Stroke="Black" Width="25" Height="25" Canvas.Top="150"/>
         <TextBlock Name="PlayerScore"  TextWrapping="Wrap" Text="Score: 0" Canvas.Left="10" Canvas.Top="10" RenderTransformOrigin="0.479,-1.003"/>
         <TextBlock Name="Pos"  TextWrapping="Wrap" Text="Score: 0" Canvas.Left="10" Canvas.Top="49" RenderTransformOrigin="0.479,-1.003"/>
     </Canvas>

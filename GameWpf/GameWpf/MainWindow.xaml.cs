@@ -44,9 +44,52 @@ namespace GameWpf
         private void Timer()
         {
             System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += BallLogic;
+            dispatcherTimer.Tick += GameLogic;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             dispatcherTimer.Start();
+        }
+
+        private void GameLogic(object sender, EventArgs e)
+        {
+            BallLogic();
+            Score();
+            PauseHandler();  
+        }
+
+        private void Score()
+        {
+            PlayerScore.Text = String.Format("{0} :X  {1} :Y ::: {2} : Height {3} : Width, SCORE: {4}", Canvas.GetLeft(Ball), Canvas.GetTop(Ball), canvas.ActualWidth, canvas.ActualHeight, score);
+            Pos.Text = String.Format("Bar X :{0} Bar  Y: {1} {2}", Canvas.GetLeft(Bar), Canvas.GetTop(Bar), pause);
+        }
+
+        public void BallLogic()
+        {
+            Canvas.SetTop(Ball, Canvas.GetTop(Ball) - ballY);
+            Canvas.SetLeft(Ball, Canvas.GetLeft(Ball) - ballX);
+            if (CheckCollisionBallWithBar(Ball, Bar))
+            {
+                ballY = -ballY;
+                score += 1;
+            }
+            if (Canvas.GetLeft(Ball) <= 1)
+            {
+                ballX = -ballX;
+            }
+
+            if (Canvas.GetLeft(Ball) >= 770)
+            {
+                ballX = -ballX;
+            }
+
+            if (Canvas.GetTop(Ball) < 0 || Canvas.GetTop(Ball) + Ball.Height > 400)
+            {
+                ballY = -ballY;
+            }
+
+            if (Canvas.GetTop(Ball) >= 380)
+            {
+                score -= 1;
+            }
         }
 
         public static bool CheckCollisionBallWithBar(FrameworkElement a, FrameworkElement b)
@@ -62,46 +105,6 @@ namespace GameWpf
             {
                 return false;
             }
-        }
-
-        private void Score()
-        {
-            PlayerScore.Text = String.Format("{0} :X  {1} :Y ::: {2} : Height {3} : Width, SCORE: {4}", Canvas.GetLeft(Ball), Canvas.GetTop(Ball), canvas.ActualWidth, canvas.ActualHeight, score);
-            Pos.Text = String.Format("Bar X :{0} Bar  Y: {1} {2}", Canvas.GetLeft(Bar), Canvas.GetTop(Bar), pause);
-        }
-
-        private void BallLogic(object sender, EventArgs e)
-        {
-            Canvas.SetTop(Ball, Canvas.GetTop(Ball) - ballY);
-            Canvas.SetLeft(Ball, Canvas.GetLeft(Ball) - ballX);
-
-            Score();
-            PauseHandler();
-
-            if (CheckCollisionBallWithBar(Ball, Bar))
-                {
-                    ballY = -ballY;
-                    score += 1;
-                }
-                if (Canvas.GetLeft(Ball) <= 1)
-                {
-                    ballX = -ballX;
-                }
-
-                if (Canvas.GetLeft(Ball) >= 770)
-                {
-                    ballX = -ballX;
-                }
-
-                if (Canvas.GetTop(Ball) < 0 || Canvas.GetTop(Ball) + Ball.Height > 400)
-                {
-                    ballY = -ballY;
-                }
-
-                if (Canvas.GetTop(Ball) >= 380)
-                {
-                    score -= 1;
-                }
         }
 
         public void PauseHandler()
@@ -155,7 +158,7 @@ namespace GameWpf
         {
             int MoveUnit = 10;
             int LeftSide = 0;
-            int RightSide = 459;
+            int RightSide = 540;
 
             if(e.Key == Key.Left)
             {

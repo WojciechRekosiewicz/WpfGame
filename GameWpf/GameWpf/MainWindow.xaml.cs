@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,8 +54,9 @@ namespace GameWpf
 
         private void Score()
         {
-            PlayerScore.Text = String.Format("{0} :X  {1} :Y ::: {2} : Height {3} : Width, SCORE: {4}", Canvas.GetLeft(Ball), Canvas.GetTop(Ball), canvas.ActualWidth, canvas.ActualHeight, score);
-            Pos.Text = String.Format("Bar X :{0} Bar  Y: {1} {2}", Canvas.GetLeft(Bar), Canvas.GetTop(Bar), pause);
+            PlayerScore.Text = String.Format("SCORE: {0}", score);
+            //  PlayerScore.Text = String.Format("{0} :X  {1} :Y ::: {2} : Height {3} : Width, SCORE: {4}", Canvas.GetLeft(Ball), Canvas.GetTop(Ball), canvas.ActualWidth, canvas.ActualHeight, score);
+            //  Pos.Text = String.Format("Bar X :{0} Bar  Y: {1} {2}", Canvas.GetLeft(Bar), Canvas.GetTop(Bar), pause);
         }
 
         public void BallLogic()
@@ -105,11 +106,17 @@ namespace GameWpf
 
         public void GameOver()
         {
-            MessageBoxResult result = MessageBox.Show($"SCORE : {score}", "Game Over!",
+            MessageBoxResult result = MessageBox.Show($"SCORE : {score} You want to start again?", "Game Over!",
                                           MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (result == MessageBoxResult.Yes)
+            if (result == MessageBoxResult.No)
             {
                 Application.Current.Shutdown();
+            }
+            else if(result == MessageBoxResult.Yes)
+            {
+                score = 0;
+                Canvas.SetTop(Ball, 150);
+                Canvas.SetLeft(Ball, 150);
             }
         }
 
